@@ -14,11 +14,21 @@ public class CameraController : MonoBehaviour
     {
         float rotationAroundYAxis = 0f;
         float rotationAroundXAxis = 0f;
+        float rotationAroundZAxis = 0f;
 
         if (Input.GetMouseButton(1))
         {
             rotationAroundYAxis = Input.GetAxis("Mouse X") * 18; // camera moves horizontally
             rotationAroundXAxis = -Input.GetAxis("Mouse Y") * 18; // camera moves vertically 
+        }
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            rotationAroundZAxis = 100 * Time.deltaTime;
+        }
+        else if (Input.GetKey(KeyCode.E))
+        {
+            rotationAroundZAxis = -100 * Time.deltaTime;
         }
 
         distanceToTarget += -Input.GetAxis("Mouse ScrollWheel") * (maxDistance - minDistance) / 10f;
@@ -28,6 +38,7 @@ public class CameraController : MonoBehaviour
 
         transform.Rotate(new Vector3(1, 0, 0), rotationAroundXAxis, Space.Self);
         transform.Rotate(new Vector3(0, 1, 0), rotationAroundYAxis, Space.Self); // <— This is what makes it work!
+        transform.Rotate(new Vector3(0, 0, 1), rotationAroundZAxis, Space.Self);
 
         transform.Translate(new Vector3(0, 0, -distanceToTarget));
     }
