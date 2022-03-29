@@ -18,7 +18,7 @@ public class ToolTipControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rect.position = Input.mousePosition;
+        rect.position = Input.mousePosition + new Vector3(0, 20);
     }
 
     public void Display(string text)
